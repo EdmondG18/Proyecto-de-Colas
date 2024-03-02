@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -84,7 +85,9 @@ namespace Proyecto_de_Colas
                                 if (tipo == 0) // Se asigna al paciente como paciente normal
                                 {
                                     Paciente nuevoPaciente = new(nombre, edad, tipo, 4);
+
                                     ninios[4].PUSH(nuevoPaciente);
+
                                     MostrarDatosPaciente(nuevoPaciente);
                                 }
                                 else // El paciente se asigna con alguna prioridad random
@@ -142,8 +145,6 @@ namespace Proyecto_de_Colas
                                     adultos[4].PUSH(nuevoPaciente);
 
                                     MostrarDatosPaciente(nuevoPaciente);
-
-                                    Console.WriteLine(nuevoPaciente.GetNombre());
                                 }
                                 else
                                 {
@@ -173,6 +174,21 @@ namespace Proyecto_de_Colas
 
                     #region MOSTRAR
                     case 3: // Mostrar Colas de Pacientes
+                        if (fullNinios > 0)
+                        {
+                            MostrarPacientes(ninios);
+                            Console.WriteLine();
+                        }
+                        else if (fullAdultos > 0)
+                        {
+                            MostrarPacientes(adultos);
+                            Console.WriteLine();
+                        }
+                        else
+                        {
+                            Console.WriteLine("No hay pacientes para mostrar");
+                        }
+
                         break;
                     #endregion
 
@@ -223,11 +239,12 @@ namespace Proyecto_de_Colas
         #endregion
 
         #region MOSTRAR PACIENTE
-        public static void MostrarDatosPaciente(Paciente paciente)
+        public static void MostrarDatosPaciente(Paciente? paciente)
         {
             Console.WriteLine("\n\nDATOS DEL PACIENTE");
-            Console.WriteLine($"Nombre: {paciente.GetNombre()}");
-            if (paciente.GetEdad() == 0)
+            Console.WriteLine($"Nombre: {paciente?.GetNombre()}");
+
+            if (paciente?.GetEdad() == 0)
             {
                 Console.WriteLine("Persona: Ninio");
             }
@@ -236,14 +253,14 @@ namespace Proyecto_de_Colas
                 Console.WriteLine("Persona: Adulto");
             }
 
-            BuscarPrioridad(paciente.GetPrioridad(), paciente.GetEdad());
+            BuscarPrioridad(paciente?.GetPrioridad(), paciente?.GetEdad());
         }
 
         #endregion
 
         #region BUSCAR PRIORIDAD
 
-        public static void BuscarPrioridad(int prioridad, int edad)
+        public static void BuscarPrioridad(int? prioridad, int? edad)
         {
             switch (prioridad)
             {
@@ -283,7 +300,26 @@ namespace Proyecto_de_Colas
 
         #endregion
 
+        #region MOSTRAR PACIENTES
+        public static void MostrarPacientes(Cola[] pacientes)
+        {
+            foreach (Cola? cola in pacientes)
+            {
+                int length = cola.GetPacientesLength();
 
+                if (length > -1)
+                {
+                    for (int i = 0; i <= length; i++)
+                    {
+                        Paciente? paciente = cola.GetPaciente(i);
+                        MostrarDatosPaciente(paciente);
+                    }
+                }
+            }
+
+            #endregion
+
+        }
         #endregion
     }
 }
