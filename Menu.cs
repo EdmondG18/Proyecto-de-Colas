@@ -223,7 +223,7 @@ namespace Proyecto_de_Colas
         #endregion
 
         #region MOSTRAR PACIENTE
-        public void MostrarDatosPaciente(Paciente paciente)
+        public static void MostrarDatosPaciente(Paciente paciente)
         {
             Console.WriteLine("\n\nDATOS DEL PACIENTE");
             Console.WriteLine($"Nombre: {paciente.GetNombre()}");
