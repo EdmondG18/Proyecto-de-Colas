@@ -8,7 +8,6 @@ namespace Proyecto_de_Colas
 {
     internal class Paciente(string? nombre, int tipo, int edad, int prioridad)
     {
-
         #region Atributos
         private readonly string? nombre = nombre;
         private readonly int tipo = tipo; // Puede ser Normal o con Prioridad

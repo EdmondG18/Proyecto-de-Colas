@@ -44,9 +44,9 @@ namespace Proyecto_de_Colas
                     #region INGRESAR
                     case 1:
                         var random = new Random();
-                        int edad = 1; // random.Next(2); // Si el random es 0 es ninio, si sale 1 es adulto
+                        int edad = random.Next(2); // Si el random es 0 es ninio, si sale 1 es adulto
                         int tipo;
-                        string? nombre;
+                        string? nombre; ;
 
                         if (edad == 0) // Es un niño
                         {
@@ -72,14 +72,19 @@ namespace Proyecto_de_Colas
                                     Console.WriteLine("Ingrese <1> si el paciente se esta muriendo.");
 
                                     Console.Write("Opcion: ");
+
                                     tipo = int.Parse(s: Console.ReadLine()!);
 
+                                    tipo = int.Parse(Console.ReadLine());
+                                    
                                     if ((tipo < 0) || (tipo > 1))
                                     {
                                         Console.WriteLine("ERROR. Tipo Invalido");
                                     }
 
                                 } while ((tipo < 0) || (tipo > 1));
+
+                                } while ((tipo < 0) || (tipo > 1));                                   
 
                                 if (tipo == 0) // Se asigna al paciente como paciente normal
                                 {
@@ -96,6 +101,8 @@ namespace Proyecto_de_Colas
                                     ninios[prioridad].PUSH(nuevoPaciente);
 
                                     MostrarDatosPaciente(nuevoPaciente);
+                                  
+                                    mostrarDatosPaciente(nuevoPaciente);
                                 }
                             }
                             else
@@ -127,14 +134,18 @@ namespace Proyecto_de_Colas
                                     Console.WriteLine("Ingrese <1> si el paciente se esta muriendo.");
 
                                     Console.Write("Opcion: ");
+
                                     tipo = int.Parse(s: Console.ReadLine()!);
 
+
+                                    tipo = int.Parse(s: Console.ReadLine());
+                                 
                                     if ((tipo < 0) || (tipo > 1))
                                     {
                                         Console.WriteLine("ERROR. Tipo Invalido");
                                     }
                                 } while ((tipo < 0) || (tipo > 1));
-
+                               
                                 if (tipo == 0) // Se asigna al paciente como paciente normal
                                 {
                                     Paciente nuevoPaciente = new(nombre, edad, tipo, 4);
@@ -149,11 +160,20 @@ namespace Proyecto_de_Colas
                                 {
                                     int prioridad = random.Next(4);
 
+                                    mostrarDatosPaciente(nuevoPaciente);
+                                    
+                                }
+                                else
+                                {
+                                    int prioridad = random.Next(4);       
+
                                     Paciente nuevoPaciente = new(nombre, edad, tipo, prioridad);
 
                                     adultos[prioridad].PUSH(nuevoPaciente);
 
                                     MostrarDatosPaciente(nuevoPaciente);
+
+                                    mostrarDatosPaciente(nuevoPaciente);
                                 }
                             }
                             else
