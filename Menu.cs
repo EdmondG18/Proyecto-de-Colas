@@ -316,10 +316,9 @@ namespace Proyecto_de_Colas
                     }
                 }
             }
-
-            #endregion
-
         }
+        #endregion
+
         #endregion
     }
 }
