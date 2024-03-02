@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -59,14 +59,14 @@ namespace Proyecto_de_Colas
         }
         #endregion
 
-        #region POPTOPE
-        public object? POPTOPE()
+        #region POPINICIAL
+        public Paciente? POPINICIAL()
         {
             if (Vacia())
             {
                 return null;
             }
-            return Elements[tope];
+            return Elements[0];
         }
         #endregion
 

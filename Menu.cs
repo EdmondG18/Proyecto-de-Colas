@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -44,7 +44,7 @@ namespace Proyecto_de_Colas
                 {
                     #region INGRESAR
                     case 1:
-                        var random = new Random();
+                        var random1 = new Random();
                         int edad = 1; // random.Next(2); // Si el random es 0 es ninio, si sale 1 es adulto
                         int tipo;
                         string? nombre;
@@ -92,7 +92,7 @@ namespace Proyecto_de_Colas
                                 }
                                 else // El paciente se asigna con alguna prioridad random
                                 {
-                                    int prioridad = random.Next(4); // Aleatoriamente se saca la prioridad del paciente para ver en que cola ira
+                                    int prioridad = random1.Next(4); // Aleatoriamente se saca la prioridad del paciente para ver en que cola ira
 
                                     Paciente nuevoPaciente = new(nombre, edad, tipo, prioridad);
 
@@ -148,7 +148,8 @@ namespace Proyecto_de_Colas
                                 }
                                 else
                                 {
-                                    int prioridad = random.Next(4);
+                                    var random2 = new Random();
+                                    int prioridad = random2.Next(4);
 
                                     Paciente nuevoPaciente = new(nombre, edad, tipo, prioridad);
 
@@ -169,6 +170,43 @@ namespace Proyecto_de_Colas
 
                     #region ATENDER
                     case 2: // Remover Paciente
+                        var random = new Random();
+                        edad = random.Next(2);
+
+
+                        if ((edad == 0) && (fullNinios > 0)) // Se removera a un nino si es que hay
+                        {
+                            fullNinios--;
+                            for (int i = 0; i < tipos; i++)
+                            {
+                                if (!(ninios[i].Vacia()))
+                                {
+                                    Console.WriteLine("\nSe esta atendiendo a este paciente: ");
+                                    MostrarDatosPaciente(ninios[i].POPINICIAL());
+                                    ninios[i].POP();
+                                    break;
+                                }
+                            }
+                        }
+                        else if (fullAdultos > 0) // Se removera a un adulto si es que hay
+                        {
+                            fullAdultos--;
+                            for (int i = 0; i < tipos; i++)
+                            {
+                                if (!(adultos[i].Vacia()))
+                                {
+                                    Console.WriteLine("Se esta atendiendo a este paciente: \n");
+                                    MostrarDatosPaciente(adultos[i].POPINICIAL());
+                                    ninios[i].POP();
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nNo hay nadie en la cola\n");
+                        }
+
                         break;
                     #endregion
 
