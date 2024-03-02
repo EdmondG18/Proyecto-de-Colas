@@ -22,12 +22,12 @@ namespace Proyecto_de_Colas
         #endregion
         #region Metodos
 
-        #region Push
+        #region PUSH
         public void PUSH(object dato)
         {
             if (Llena())
             {
-                Console.WriteLine("ERROR, pila llena");
+                Console.WriteLine("ERROR, cola llena");
                 Console.ReadKey();
             }
             else
@@ -40,7 +40,22 @@ namespace Proyecto_de_Colas
         #region POP
         public void POP()
         {
-            // Desarrollar Metodo para Sacar de Cola
+            if (!Vacia())
+            {
+                for (int i = 0; i < tope; i++)
+                {
+                    Elements[i] = Elements[i + 1];
+                }
+
+                Elements[tope] = "";
+
+                tope--;
+            }
+            else
+            {
+                Console.WriteLine("ERROR, cola vacia");
+            }
+
         }
         #endregion
 
@@ -55,21 +70,21 @@ namespace Proyecto_de_Colas
         }
         #endregion
 
-        #region Llena
+        #region LLENA
         public bool Llena()
         {
             return tope == MAX;
         }
         #endregion
 
-        #region Vacia
+        #region VACIA
         public bool Vacia()
         {
             return tope == -1;
         }
         #endregion
 
-        #region Mostrar
+        #region MOSTRAR
         public void Mostrar()
         {
             if (!Vacia())
@@ -78,11 +93,16 @@ namespace Proyecto_de_Colas
                 {
                     Console.WriteLine(Elements[i]);
                 }
+
+            }
+            else
+            {
+                Console.WriteLine("La cola se encuentra vacía");
             }
         }
         #endregion
 
-        #region Contar
+        #region CONTAR
         public int Contar()
         {
             int cantidad = 0;
