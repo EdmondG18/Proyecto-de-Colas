@@ -23,6 +23,7 @@ namespace Proyecto_de_Colas
         #region Metodos
 
         #region PUSH
+    
         public void PUSH(Paciente dato)
         {
             if (Llena())
@@ -42,7 +43,6 @@ namespace Proyecto_de_Colas
             if (Vacia())
             {
                 Console.WriteLine("No hay nadie con este tipo de condicion para atender.");
-                Console.WriteLine("ERROR, cola vacia");
             }
             else
             {
