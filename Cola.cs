@@ -9,25 +9,25 @@ namespace Proyecto_de_Colas
     internal class Cola
     {
         #region Atributos 
-        protected const int MAX = 30; // Definir el maximo para que una cola se llene
-        object[] Elements;
+        protected const int MAX = 25; 
+        Paciente[] Elements;
         int tope;
         #endregion
         #region Constructor
         public Cola()
         {
             tope = -1;
-            Elements = new object[MAX];
+            Elements = new Paciente[MAX];
         }
         #endregion
         #region Metodos
 
-        #region Push
-        public void PUSH(object dato)
+        #region PUSH
+        public void PUSH(Paciente dato)
         {
             if (Llena())
             {
-                Console.WriteLine("ERROR, pila llena");
+                Console.WriteLine("\nLo siento, ya no aceptamos mas pacientes con esta condicion.\n");
                 Console.ReadKey();
             }
             else
@@ -41,6 +41,22 @@ namespace Proyecto_de_Colas
         public void POP()
         {
             // Desarrollar Metodo para Sacar de Cola
+            if (!Vacia())
+            {
+                for (int i = 0; i < tope; i++)
+                {
+                    Elements[i] = Elements[i + 1];
+                }
+
+                Elements[tope] = null;
+
+                tope--;
+            }
+            else
+            {
+                Console.WriteLine("No hay nadie con este tipo de condicion para atender.");
+            }
+
         }
         #endregion
 
@@ -55,21 +71,21 @@ namespace Proyecto_de_Colas
         }
         #endregion
 
-        #region Llena
+        #region LLENA
         public bool Llena()
         {
             return tope == MAX;
         }
         #endregion
 
-        #region Vacia
+        #region VACIA
         public bool Vacia()
         {
             return tope == -1;
         }
         #endregion
 
-        #region Mostrar
+        #region MOSTRAR
         public void Mostrar()
         {
             if (!Vacia())
@@ -79,10 +95,14 @@ namespace Proyecto_de_Colas
                     Console.WriteLine(Elements[i]);
                 }
             }
+            else
+            {
+                Console.WriteLine("No hay pacientes con esta condicion.");
+            }
         }
         #endregion
 
-        #region Contar
+        #region CONTAR
         public int Contar()
         {
             int cantidad = 0;
