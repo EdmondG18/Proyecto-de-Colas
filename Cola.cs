@@ -23,20 +23,12 @@ namespace Proyecto_de_Colas
         #region Metodos
 
         #region PUSH
-<<<<<<< HEAD
+
         public void PUSH(Paciente dato)
         {
             if (Llena())
             {
                 Console.WriteLine("\nLo siento, ya no aceptamos mas pacientes con esta condicion.\n");
-=======
-        public void PUSH(object dato)
-        {
-            if (Llena())
-            {
-                Console.WriteLine("ERROR, cola llena");
->>>>>>> 7604d4a54ed850e39904e445964c70db1172a2a9
-                Console.ReadKey();
             }
             else
             {
@@ -48,32 +40,19 @@ namespace Proyecto_de_Colas
         #region POP
         public void POP()
         {
-<<<<<<< HEAD
             // Desarrollar Metodo para Sacar de Cola
-=======
->>>>>>> 7604d4a54ed850e39904e445964c70db1172a2a9
             if (!Vacia())
             {
                 for (int i = 0; i < tope; i++)
                 {
                     Elements[i] = Elements[i + 1];
                 }
-
-<<<<<<< HEAD
                 Elements[tope] = null;
-=======
-                Elements[tope] = "";
->>>>>>> 7604d4a54ed850e39904e445964c70db1172a2a9
-
                 tope--;
             }
             else
             {
-<<<<<<< HEAD
                 Console.WriteLine("No hay nadie con este tipo de condicion para atender.");
-=======
-                Console.WriteLine("ERROR, cola vacia");
->>>>>>> 7604d4a54ed850e39904e445964c70db1172a2a9
             }
 
         }
@@ -114,10 +93,6 @@ namespace Proyecto_de_Colas
                     Console.WriteLine(Elements[i]);
                 }
 
-            }
-            else
-            {
-                Console.WriteLine("La cola se encuentra vacía");
             }
             else
             {
