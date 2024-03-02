@@ -40,9 +40,9 @@ namespace Proyecto_de_Colas {
                     #region INGRESAR
                     case 1:
                         var random = new Random();
-                        int edad = 1; // random.Next(2); // Si el random es 0 es ninio, si sale 1 es adulto
+                        int edad = random.Next(2); // Si el random es 0 es ninio, si sale 1 es adulto
                         int tipo;
-                        string? nombre;
+                        string? nombre; ;
 
                         if (edad == 0) // Es un niño
                         {
@@ -67,11 +67,12 @@ namespace Proyecto_de_Colas {
                                     Console.WriteLine("Ingrese <1> si el paciente se esta muriendo.");
                                     Console.Write("Opcion: ");
                                     tipo = int.Parse(Console.ReadLine());
+                                    
                                     if ((tipo < 0) || (tipo > 1))
                                     {
                                         Console.WriteLine("ERROR. Tipo Invalido");
                                     }
-                                } while ((tipo < 0) || (tipo > 1));
+                                } while ((tipo < 0) || (tipo > 1));                                   
 
                                 if (tipo == 0) // Se asigna al paciente como paciente normal
                                 {
@@ -84,8 +85,7 @@ namespace Proyecto_de_Colas {
                                     int prioridad = random.Next(4); // Aleatoriamente se saca la prioridad del paciente para ver en que cola ira
                                     Paciente nuevoPaciente = new(nombre, edad, tipo, prioridad);
                                     ninios[prioridad].PUSH(nuevoPaciente);
-                                    Console.WriteLine(nuevoPaciente.GetNombre());
-                                    // mostrarDatosPaciente(nuevoPaciente);
+                                    mostrarDatosPaciente(nuevoPaciente);
                                 }
                             }
                             else
@@ -115,27 +115,28 @@ namespace Proyecto_de_Colas {
                                     Console.WriteLine("Ingrese <0> si el paciente no tiene nada grave.");
                                     Console.WriteLine("Ingrese <1> si el paciente se esta muriendo.");
                                     Console.Write("Opcion: ");
-                                    tipo = int.Parse(Console.ReadLine());
+                                    tipo = int.Parse(s: Console.ReadLine());
                                  
                                     if ((tipo < 0) || (tipo > 1))
                                     {
                                         Console.WriteLine("ERROR. Tipo Invalido");
                                     }
                                 } while ((tipo < 0) || (tipo > 1));
-
+                               
                                 if (tipo == 0) // Se asigna al paciente como paciente normal
                                 {
                                     Paciente nuevoPaciente = new(nombre, edad, tipo, 4);
                                     adultos[4].PUSH(nuevoPaciente);
-                                    // mostrarDatosPaciente(nuevoPaciente);
-                                    Console.WriteLine(nuevoPaciente.GetNombre());
+                                    mostrarDatosPaciente(nuevoPaciente);
+                                    
                                 }
                                 else
                                 {
-                                    int prioridad = random.Next(4);
+                                    int prioridad = random.Next(4);       
                                     Paciente nuevoPaciente = new(nombre, edad, tipo, prioridad);
                                     adultos[prioridad].PUSH(nuevoPaciente);
                                     mostrarDatosPaciente(nuevoPaciente);
+                                    
                                 }
                             }
                             else
@@ -196,7 +197,7 @@ namespace Proyecto_de_Colas {
             Cola[] adultos = new Cola[5];
             for (int i = 0; i < tipos; i++) // i=0 (Accidente) // i=1 (Infarto) // i=2 (Afeccion) // i=3 (Partos) // i=4 (Normal)
             {
-                ninios[i] = new Cola();
+                adultos[i] = new Cola();
             }
 
             SubMenu(ninios, adultos);

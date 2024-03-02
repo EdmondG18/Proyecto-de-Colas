@@ -12,10 +12,10 @@ namespace Proyecto_de_Colas
         #region Constructor
 
         public Paciente(string nombre, int edad, int tipo, int prioridad) {
-            nombre = this.nombre;
-            edad = this.edad;
-            tipo = this.tipo;
-            prioridad = this.prioridad;
+            this.nombre = nombre;
+            this.edad = edad;
+            this.tipo = tipo;
+            this.prioridad = prioridad;
         }
         #endregion
 
@@ -34,7 +34,6 @@ namespace Proyecto_de_Colas
 
         public string GetNombre()
         {
-
             return nombre;
         }
         #endregion
