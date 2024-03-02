@@ -26,8 +26,11 @@ namespace Proyecto_de_Colas {
         #region SubMenu
         public void SubMenu(Cola[] ninios, Cola[] adultos)
         {
+            var random = new Random();
+            int edad;
             do
             {
+
                 Console.WriteLine("\nIngrese la opcion que desee realizar: ");
                 Console.WriteLine("1. Ingresar paciente");
                 Console.WriteLine("2. Atender paciente");
@@ -39,8 +42,7 @@ namespace Proyecto_de_Colas {
                 {
                     #region INGRESAR
                     case 1:
-                        var random = new Random();
-                        int edad = random.Next(2); // Si el random es 0 es ninio, si sale 1 es adulto
+                        edad = random.Next(2); // Si el random es 0 es ninio, si sale 1 es adulto
                         int tipo;
                         string? nombre; ;
 
@@ -151,6 +153,43 @@ namespace Proyecto_de_Colas {
 
                     #region ATENDER
                     case 2: // Remover Paciente
+                        edad = random.Next(2);
+
+                        if ((edad == 0) && (fullNinios > 0)) // Se removera a un nino si es que hay
+                        {
+                            fullNinios--;
+
+                            for (int i = 0; i < tipos; i++)
+                            {
+                                if (!(ninios[i].Vacia()))
+                                {
+                                    Console.WriteLine("\nSe esta atendiendo a este paciente: ");
+                                    MostrarDatosPaciente(ninios[i].POPINICIAL());
+                                    ninios[i].POP();
+                                    break;
+                                }
+                            }
+                        }
+                        else if (fullAdultos > 0) // Se removera a un adulto si es que hay
+                        {
+                            fullAdultos--;
+
+                            for (int i = 0; i < tipos; i++)
+                            {
+                                if (!(adultos[i].Vacia()))
+                                {
+                                    Console.WriteLine("Se esta atendiendo a este paciente: \n");
+                                    MostrarDatosPaciente(adultos[i].POPINICIAL());
+                                    ninios[i].POP();
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nNo hay nadie en la cola\n");
+                        }
+
                         break;
                     #endregion
 

@@ -50,22 +50,17 @@ namespace Proyecto_de_Colas
                 Elements[tope] = null;
                 tope--;
             }
-            else
-            {
-                Console.WriteLine("No hay nadie con este tipo de condicion para atender.");
-            }
-
         }
         #endregion
 
-        #region POPTOPE
-        public Paciente? POPTOPE()
+        #region POPINICIAL
+        public Paciente? POPINICIAL()
         {
             if (Vacia())
             {
                 return null;
             }
-            return Elements[tope];
+            return Elements[0];
         }
         #endregion
 
