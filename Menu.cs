@@ -177,6 +177,7 @@ namespace Proyecto_de_Colas
                         if ((edad == 0) && (fullNinios > 0)) // Se removera a un nino si es que hay
                         {
                             fullNinios--;
+
                             for (int i = 0; i < tipos; i++)
                             {
                                 if (!(ninios[i].Vacia()))
@@ -191,13 +192,14 @@ namespace Proyecto_de_Colas
                         else if (fullAdultos > 0) // Se removera a un adulto si es que hay
                         {
                             fullAdultos--;
+
                             for (int i = 0; i < tipos; i++)
                             {
                                 if (!(adultos[i].Vacia()))
                                 {
                                     Console.WriteLine("Se esta atendiendo a este paciente: \n");
                                     MostrarDatosPaciente(adultos[i].POPINICIAL());
-                                    ninios[i].POP();
+                                    adultos[i].POP();
                                     break;
                                 }
                             }
