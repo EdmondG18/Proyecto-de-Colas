@@ -2,16 +2,20 @@
 using System;
 
 Menu m = new(); // Se crea el menu
-/*
- * Testing de POP()
- * 
+
+/* 
 Cola cola = new Cola();
-cola.PUSH("Sexo");
-cola.PUSH("Pene");
+cola.PUSH(new Paciente("Edmond", 0, 0, 4));
+cola.PUSH(new Paciente("Prodo", 0, 0, 3));
+cola.Mostrar();
+Console.ReadKey();
 cola.POP();
 cola.Mostrar();
-
- */
+Console.ReadKey();
+cola.POP();
+cola.Mostrar();
+*/
+ 
 m.CrearColas();
 
 

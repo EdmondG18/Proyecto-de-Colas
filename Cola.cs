@@ -85,7 +85,7 @@ namespace Proyecto_de_Colas
             {
                 for (int i = 0; i < tope + 1; i++)
                 {
-                    Console.WriteLine(Elements[i]);
+                    Console.WriteLine(Elements[i].GetNombre());
                 }
 
             }

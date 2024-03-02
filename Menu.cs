@@ -30,7 +30,6 @@ namespace Proyecto_de_Colas {
             int edad;
             do
             {
-
                 Console.WriteLine("\nIngrese la opcion que desee realizar: ");
                 Console.WriteLine("1. Ingresar paciente");
                 Console.WriteLine("2. Atender paciente");
@@ -155,10 +154,10 @@ namespace Proyecto_de_Colas {
                     case 2: // Remover Paciente
                         edad = random.Next(2);
 
+                        
                         if ((edad == 0) && (fullNinios > 0)) // Se removera a un nino si es que hay
                         {
                             fullNinios--;
-
                             for (int i = 0; i < tipos; i++)
                             {
                                 if (!(ninios[i].Vacia()))
@@ -173,7 +172,6 @@ namespace Proyecto_de_Colas {
                         else if (fullAdultos > 0) // Se removera a un adulto si es que hay
                         {
                             fullAdultos--;
-
                             for (int i = 0; i < tipos; i++)
                             {
                                 if (!(adultos[i].Vacia()))
@@ -189,12 +187,19 @@ namespace Proyecto_de_Colas {
                         {
                             Console.WriteLine("\nNo hay nadie en la cola\n");
                         }
-
+                        
                         break;
                     #endregion
 
                     #region MOSTRAR
                     case 3: // Mostrar Colas de Pacientes
+                        int cont = 0;
+                        for (int i = 0; i < tipos; i++)
+                        {
+                            cont += ninios[i].Contar();
+                            cont += adultos[i].Contar();
+                        }
+                        Console.WriteLine(cont);
                         break;
                     #endregion
 
