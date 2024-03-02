@@ -10,7 +10,7 @@ namespace Proyecto_de_Colas
     {
         #region Atributos 
         protected const int MAX = 25;
-        Paciente?[] Elements;
+        readonly Paciente?[] Elements;
         int tope;
         #endregion
         #region Constructor
@@ -20,6 +20,7 @@ namespace Proyecto_de_Colas
             Elements = new Paciente[MAX];
         }
         #endregion
+
         #region Metodos
 
         #region PUSH
@@ -114,8 +115,23 @@ namespace Proyecto_de_Colas
         }
         #endregion
 
+        #region GET PACIENTE
+
+        public Paciente? GetPaciente(int pos)
+        {
+            return Elements[pos];
+        }
+
         #endregion
 
+        #region GET LENGTH
 
+        public int GetPacientesLength()
+        {
+            return tope;
+        }
+        #endregion
+
+        #endregion
     }
 }
