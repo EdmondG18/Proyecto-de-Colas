@@ -1,15 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace Proyecto_de_Colas {
+namespace Proyecto_de_Colas
+{
     internal class Menu
     {
         #region Constructor 
-        public Menu(){
+        public Menu()
+        {
         }
         #endregion
 
@@ -26,8 +29,6 @@ namespace Proyecto_de_Colas {
         #region SubMenu
         public void SubMenu(Cola[] ninios, Cola[] adultos)
         {
-            var random = new Random();
-            int edad;
             do
             {
                 Console.WriteLine("\nIngrese la opcion que desee realizar: ");
@@ -35,26 +36,30 @@ namespace Proyecto_de_Colas {
                 Console.WriteLine("2. Atender paciente");
                 Console.WriteLine("3. Mostrar todos los pacientes en cola");
                 Console.WriteLine("4. Salir");
+
                 Console.Write("Opcion: ");
-                op = int.Parse(Console.ReadLine());
+                op = int.Parse(s: Console.ReadLine()!);
+
                 switch (op)
                 {
                     #region INGRESAR
                     case 1:
-                        edad = random.Next(2); // Si el random es 0 es ninio, si sale 1 es adulto
+                        var random1 = new Random();
+                        int edad = 1; // random.Next(2); // Si el random es 0 es ninio, si sale 1 es adulto
                         int tipo;
-                        string? nombre; ;
+                        string? nombre;
 
                         if (edad == 0) // Es un niño
                         {
                             if (fullNinios != maxPorMedico)
                             {
                                 fullNinios++; // Se incrementa la cantidad de ninios en cola
-                                
+
                                 do
                                 {
                                     Console.Write("Ingrese el nombre del paciente: ");
                                     nombre = Console.ReadLine();
+
                                     if (string.IsNullOrEmpty(nombre))
                                     {
                                         Console.WriteLine("No ingreso ningun nombre.");
@@ -66,26 +71,33 @@ namespace Proyecto_de_Colas {
                                 {
                                     Console.WriteLine("Ingrese <0> si el paciente no tiene nada grave.");
                                     Console.WriteLine("Ingrese <1> si el paciente se esta muriendo.");
+
                                     Console.Write("Opcion: ");
-                                    tipo = int.Parse(Console.ReadLine());
-                                    
+                                    tipo = int.Parse(s: Console.ReadLine()!);
+
                                     if ((tipo < 0) || (tipo > 1))
                                     {
                                         Console.WriteLine("ERROR. Tipo Invalido");
                                     }
-                                } while ((tipo < 0) || (tipo > 1));                                   
+
+                                } while ((tipo < 0) || (tipo > 1));
 
                                 if (tipo == 0) // Se asigna al paciente como paciente normal
                                 {
                                     Paciente nuevoPaciente = new(nombre, edad, tipo, 4);
+
                                     ninios[4].PUSH(nuevoPaciente);
+
                                     MostrarDatosPaciente(nuevoPaciente);
                                 }
                                 else // El paciente se asigna con alguna prioridad random
                                 {
-                                    int prioridad = random.Next(4); // Aleatoriamente se saca la prioridad del paciente para ver en que cola ira
+                                    int prioridad = random1.Next(4); // Aleatoriamente se saca la prioridad del paciente para ver en que cola ira
+
                                     Paciente nuevoPaciente = new(nombre, edad, tipo, prioridad);
+
                                     ninios[prioridad].PUSH(nuevoPaciente);
+
                                     MostrarDatosPaciente(nuevoPaciente);
                                 }
                             }
@@ -104,10 +116,11 @@ namespace Proyecto_de_Colas {
                                 {
                                     Console.Write("Ingrese el nombre del paciente: ");
                                     nombre = Console.ReadLine();
+
                                     if (string.IsNullOrEmpty(nombre))
                                     {
                                         Console.WriteLine("No ingreso ningun nombre.");
-                                    }    
+                                    }
 
                                 } while (string.IsNullOrEmpty(nombre));
 
@@ -115,29 +128,34 @@ namespace Proyecto_de_Colas {
                                 {
                                     Console.WriteLine("Ingrese <0> si el paciente no tiene nada grave.");
                                     Console.WriteLine("Ingrese <1> si el paciente se esta muriendo.");
+
                                     Console.Write("Opcion: ");
-                                    tipo = int.Parse(s: Console.ReadLine());
-                                 
+                                    tipo = int.Parse(s: Console.ReadLine()!);
+
                                     if ((tipo < 0) || (tipo > 1))
                                     {
                                         Console.WriteLine("ERROR. Tipo Invalido");
                                     }
                                 } while ((tipo < 0) || (tipo > 1));
-                               
+
                                 if (tipo == 0) // Se asigna al paciente como paciente normal
                                 {
                                     Paciente nuevoPaciente = new(nombre, edad, tipo, 4);
+
                                     adultos[4].PUSH(nuevoPaciente);
+
                                     MostrarDatosPaciente(nuevoPaciente);
-                                    
                                 }
                                 else
                                 {
-                                    int prioridad = random.Next(4);       
+                                    var random2 = new Random();
+                                    int prioridad = random2.Next(4);
+
                                     Paciente nuevoPaciente = new(nombre, edad, tipo, prioridad);
+
                                     adultos[prioridad].PUSH(nuevoPaciente);
+
                                     MostrarDatosPaciente(nuevoPaciente);
-                                    
                                 }
                             }
                             else
@@ -147,14 +165,15 @@ namespace Proyecto_de_Colas {
                         }
 
                         break;
-                        
+
                     #endregion
 
                     #region ATENDER
                     case 2: // Remover Paciente
+                        var random = new Random();
                         edad = random.Next(2);
 
-                        
+
                         if ((edad == 0) && (fullNinios > 0)) // Se removera a un nino si es que hay
                         {
                             fullNinios--;
@@ -187,19 +206,27 @@ namespace Proyecto_de_Colas {
                         {
                             Console.WriteLine("\nNo hay nadie en la cola\n");
                         }
-                        
+
                         break;
                     #endregion
 
                     #region MOSTRAR
                     case 3: // Mostrar Colas de Pacientes
-                        int cont = 0;
-                        for (int i = 0; i < tipos; i++)
+                        if (fullNinios > 0)
                         {
-                            cont += ninios[i].Contar();
-                            cont += adultos[i].Contar();
+                            MostrarPacientes(ninios);
+                            Console.WriteLine();
                         }
-                        Console.WriteLine(cont);
+                        else if (fullAdultos > 0)
+                        {
+                            MostrarPacientes(adultos);
+                            Console.WriteLine();
+                        }
+                        else
+                        {
+                            Console.WriteLine("No hay pacientes para mostrar");
+                        }
+
                         break;
                     #endregion
 
@@ -213,8 +240,9 @@ namespace Proyecto_de_Colas {
                     default:
                         Console.WriteLine("\nERROR. Opcion Invalida");
                         break;
-                    #endregion
+                        #endregion
                 }
+
                 if (op != 4)
                 {
                     Console.WriteLine("\nIngrese cualquier tecla para continuar...");
@@ -249,11 +277,12 @@ namespace Proyecto_de_Colas {
         #endregion
 
         #region MOSTRAR PACIENTE
-        public static void MostrarDatosPaciente(Paciente paciente)
+        public static void MostrarDatosPaciente(Paciente? paciente)
         {
             Console.WriteLine("\n\nDATOS DEL PACIENTE");
-            Console.WriteLine($"Nombre: {paciente.GetNombre()}");
-            if (paciente.GetEdad() == 0)
+            Console.WriteLine($"Nombre: {paciente?.GetNombre()}");
+
+            if (paciente?.GetEdad() == 0)
             {
                 Console.WriteLine("Persona: Ninio");
             }
@@ -262,16 +291,16 @@ namespace Proyecto_de_Colas {
                 Console.WriteLine("Persona: Adulto");
             }
 
-            BuscarPrioridad(paciente.GetPrioridad(), paciente.GetEdad());
+            BuscarPrioridad(paciente?.GetPrioridad(), paciente?.GetEdad());
         }
 
         #endregion
 
         #region BUSCAR PRIORIDAD
 
-        public static void BuscarPrioridad(int prioridad, int edad)
+        public static void BuscarPrioridad(int? prioridad, int? edad)
         {
-            switch(prioridad)
+            switch (prioridad)
             {
                 case 0:
                     Console.WriteLine("Prioridad: Maxima");
@@ -309,6 +338,24 @@ namespace Proyecto_de_Colas {
 
         #endregion
 
+        #region MOSTRAR PACIENTES
+        public static void MostrarPacientes(Cola[] pacientes)
+        {
+            foreach (Cola? cola in pacientes)
+            {
+                int length = cola.GetPacientesLength();
+
+                if (length > -1)
+                {
+                    for (int i = 0; i <= length; i++)
+                    {
+                        Paciente? paciente = cola.GetPaciente(i);
+                        MostrarDatosPaciente(paciente);
+                    }
+                }
+            }
+        }
+        #endregion
 
         #endregion
     }

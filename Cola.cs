@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +9,8 @@ namespace Proyecto_de_Colas
     internal class Cola
     {
         #region Atributos 
-        protected const int MAX = 25; 
-        Paciente[] Elements;
+        protected const int MAX = 25;
+        readonly Paciente?[] Elements;
         int tope;
         #endregion
         #region Constructor
@@ -20,10 +20,10 @@ namespace Proyecto_de_Colas
             Elements = new Paciente[MAX];
         }
         #endregion
+
         #region Metodos
 
         #region PUSH
-
         public void PUSH(Paciente dato)
         {
             if (Llena())
@@ -40,16 +40,22 @@ namespace Proyecto_de_Colas
         #region POP
         public void POP()
         {
-            // Desarrollar Metodo para Sacar de Cola
-            if (!Vacia())
+            if (Vacia())
+            {
+                Console.WriteLine("No hay nadie con este tipo de condicion para atender.");
+                Console.WriteLine("ERROR, cola vacia");
+            }
+            else
             {
                 for (int i = 0; i < tope; i++)
                 {
                     Elements[i] = Elements[i + 1];
                 }
+
                 Elements[tope] = null;
                 tope--;
             }
+
         }
         #endregion
 
@@ -85,7 +91,7 @@ namespace Proyecto_de_Colas
             {
                 for (int i = 0; i < tope + 1; i++)
                 {
-                    Console.WriteLine(Elements[i].GetNombre());
+                    Console.WriteLine(Elements[i]);
                 }
 
             }
@@ -109,8 +115,23 @@ namespace Proyecto_de_Colas
         }
         #endregion
 
+        #region GET PACIENTE
+
+        public Paciente? GetPaciente(int pos)
+        {
+            return Elements[pos];
+        }
+
         #endregion
 
+        #region GET LENGTH
 
+        public int GetPacientesLength()
+        {
+            return tope;
+        }
+        #endregion
+
+        #endregion
     }
 }
