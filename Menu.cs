@@ -15,10 +15,10 @@ namespace Proyecto_de_Colas {
 
         #region Atributos 
         private int op;
-        private int tipos = 5; // Tipos de afecciones (Accidentes, Infartos, Afecciones Respiratorias, Partos/Pediatria, Normal)
+        private readonly int tipos = 5; // Tipos de afecciones (Accidentes, Infartos, Afecciones Respiratorias, Partos/Pediatria, Normal)
         private int fullNinios = 0; // El tope sera 25 ninios (5 por enfermedad)
         private int fullAdultos = 0; // El tope sera 25 adultos (5 por enfermedad)
-        private int maxPorMedico = 25;
+        private readonly int maxPorMedico = 25;
         #endregion
 
         #region Metodos
@@ -78,14 +78,14 @@ namespace Proyecto_de_Colas {
                                 {
                                     Paciente nuevoPaciente = new(nombre, edad, tipo, 4);
                                     ninios[4].PUSH(nuevoPaciente);
-                                    mostrarDatosPaciente(nuevoPaciente);
+                                    MostrarDatosPaciente(nuevoPaciente);
                                 }
                                 else // El paciente se asigna con alguna prioridad random
                                 {
                                     int prioridad = random.Next(4); // Aleatoriamente se saca la prioridad del paciente para ver en que cola ira
                                     Paciente nuevoPaciente = new(nombre, edad, tipo, prioridad);
                                     ninios[prioridad].PUSH(nuevoPaciente);
-                                    mostrarDatosPaciente(nuevoPaciente);
+                                    MostrarDatosPaciente(nuevoPaciente);
                                 }
                             }
                             else
@@ -127,7 +127,7 @@ namespace Proyecto_de_Colas {
                                 {
                                     Paciente nuevoPaciente = new(nombre, edad, tipo, 4);
                                     adultos[4].PUSH(nuevoPaciente);
-                                    mostrarDatosPaciente(nuevoPaciente);
+                                    MostrarDatosPaciente(nuevoPaciente);
                                     
                                 }
                                 else
@@ -135,7 +135,7 @@ namespace Proyecto_de_Colas {
                                     int prioridad = random.Next(4);       
                                     Paciente nuevoPaciente = new(nombre, edad, tipo, prioridad);
                                     adultos[prioridad].PUSH(nuevoPaciente);
-                                    mostrarDatosPaciente(nuevoPaciente);
+                                    MostrarDatosPaciente(nuevoPaciente);
                                     
                                 }
                             }
@@ -205,7 +205,7 @@ namespace Proyecto_de_Colas {
         #endregion
 
         #region MOSTRAR PACIENTE
-        public void mostrarDatosPaciente(Paciente paciente)
+        public static void MostrarDatosPaciente(Paciente paciente)
         {
             Console.WriteLine("\n\nDATOS DEL PACIENTE");
             Console.WriteLine($"Nombre: {paciente.GetNombre()}");
@@ -218,14 +218,14 @@ namespace Proyecto_de_Colas {
                 Console.WriteLine("Persona: Adulto");
             }
 
-            buscarPrioridad(paciente.GetPrioridad(), paciente.GetEdad());
+            BuscarPrioridad(paciente.GetPrioridad(), paciente.GetEdad());
         }
 
         #endregion
 
         #region BUSCAR PRIORIDAD
 
-        public void buscarPrioridad(int prioridad, int edad)
+        public static void BuscarPrioridad(int prioridad, int edad)
         {
             switch(prioridad)
             {

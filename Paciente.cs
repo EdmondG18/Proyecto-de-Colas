@@ -6,24 +6,14 @@ using System.Threading.Tasks;
 
 namespace Proyecto_de_Colas
 {
-    internal class Paciente
+    internal class Paciente(string nombre, int edad, int tipo, int prioridad)
     {
 
-        #region Constructor
-
-        public Paciente(string nombre, int edad, int tipo, int prioridad) {
-            this.nombre = nombre;
-            this.edad = edad;
-            this.tipo = tipo;
-            this.prioridad = prioridad;
-        }
-        #endregion
-
         #region Atributos
-        private string nombre;
-        private int tipo; // Puede ser Normal o con Prioridad
-        private int prioridad; // Va del 0 al 4 sera para saber en que cola se asignara al paciente
-        private int edad; // Sera 0 para ninio y 1 para adulto
+        private readonly string nombre = nombre;
+        private readonly int tipo = tipo; // Puede ser Normal o con Prioridad
+        private readonly int prioridad = prioridad; // Va del 0 al 4 sera para saber en que cola se asignara al paciente
+        private readonly int edad = edad; // Sera 0 para ninio y 1 para adulto
         #endregion
 
         #region Metodos

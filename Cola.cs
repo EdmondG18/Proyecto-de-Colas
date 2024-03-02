@@ -59,7 +59,7 @@ namespace Proyecto_de_Colas
         #endregion
 
         #region POPTOPE
-        public object POPTOPE()
+        public Paciente? POPTOPE()
         {
             if (Vacia())
             {
