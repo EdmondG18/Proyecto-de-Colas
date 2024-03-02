@@ -1,17 +1,5 @@
-﻿using System;
+﻿using Proyecto_de_Colas;
+using System;
 
-namespace Proyecto_de_Colas
-{
-
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Menu m = new Menu(); // Se crea el menu
-
-            m.CrearColas();
-        }
-    }
-}
-
-
+Menu m = new(); // Se crea el menu
+m.CrearColas();
