@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Proyecto_de_Colas
 {
-    internal class Paciente(string nombre, int edad, int tipo, int prioridad)
+    internal class Paciente(string? nombre, int tipo, int edad, int prioridad)
     {
-
         #region Atributos
-        private readonly string nombre = nombre;
+        private readonly string? nombre = nombre;
         private readonly int tipo = tipo; // Puede ser Normal o con Prioridad
         private readonly int prioridad = prioridad; // Va del 0 al 4 sera para saber en que cola se asignara al paciente
         private readonly int edad = edad; // Sera 0 para ninio y 1 para adulto
@@ -19,10 +18,7 @@ namespace Proyecto_de_Colas
         #region Metodos
 
         #region getNombre
-
-        
-
-        public string GetNombre()
+        public string? GetNombre()
         {
             return nombre;
         }
@@ -33,7 +29,8 @@ namespace Proyecto_de_Colas
             return tipo;
         }
 
-        public int GetPrioridad() { 
+        public int GetPrioridad()
+        {
             return prioridad;
         }
 

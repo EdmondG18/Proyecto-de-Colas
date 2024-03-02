@@ -9,8 +9,8 @@ namespace Proyecto_de_Colas
     internal class Cola
     {
         #region Atributos 
-        protected const int MAX = 25; 
-        Paciente[] Elements;
+        protected const int MAX = 25;
+        Paciente?[] Elements;
         int tope;
         #endregion
         #region Constructor
@@ -23,7 +23,7 @@ namespace Proyecto_de_Colas
         #region Metodos
 
         #region PUSH
-
+    
         public void PUSH(Paciente dato)
         {
             if (Llena())
@@ -40,13 +40,17 @@ namespace Proyecto_de_Colas
         #region POP
         public void POP()
         {
-            // Desarrollar Metodo para Sacar de Cola
-            if (!Vacia())
+            if (Vacia())
+            {
+                Console.WriteLine("No hay nadie con este tipo de condicion para atender.");
+            }
+            else
             {
                 for (int i = 0; i < tope; i++)
                 {
                     Elements[i] = Elements[i + 1];
                 }
+
                 Elements[tope] = null;
                 tope--;
             }

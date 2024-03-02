@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace Proyecto_de_Colas {
+namespace Proyecto_de_Colas
+{
     internal class Menu
     {
         #region Constructor 
-        public Menu(){
+        public Menu()
+        {
         }
         #endregion
 
@@ -36,8 +38,10 @@ namespace Proyecto_de_Colas {
                 Console.WriteLine("2. Atender paciente");
                 Console.WriteLine("3. Mostrar todos los pacientes en cola");
                 Console.WriteLine("4. Salir");
+
                 Console.Write("Opcion: ");
-                op = int.Parse(Console.ReadLine());
+                op = int.Parse(s: Console.ReadLine()!);
+
                 switch (op)
                 {
                     #region INGRESAR
@@ -51,11 +55,12 @@ namespace Proyecto_de_Colas {
                             if (fullNinios != maxPorMedico)
                             {
                                 fullNinios++; // Se incrementa la cantidad de ninios en cola
-                                
+
                                 do
                                 {
                                     Console.Write("Ingrese el nombre del paciente: ");
                                     nombre = Console.ReadLine();
+
                                     if (string.IsNullOrEmpty(nombre))
                                     {
                                         Console.WriteLine("No ingreso ningun nombre.");
@@ -67,13 +72,20 @@ namespace Proyecto_de_Colas {
                                 {
                                     Console.WriteLine("Ingrese <0> si el paciente no tiene nada grave.");
                                     Console.WriteLine("Ingrese <1> si el paciente se esta muriendo.");
+
                                     Console.Write("Opcion: ");
+
+                                    tipo = int.Parse(s: Console.ReadLine()!);
+
                                     tipo = int.Parse(Console.ReadLine());
                                     
                                     if ((tipo < 0) || (tipo > 1))
                                     {
                                         Console.WriteLine("ERROR. Tipo Invalido");
                                     }
+
+                                } while ((tipo < 0) || (tipo > 1));
+
                                 } while ((tipo < 0) || (tipo > 1));                                   
 
                                 if (tipo == 0) // Se asigna al paciente como paciente normal
@@ -85,9 +97,13 @@ namespace Proyecto_de_Colas {
                                 else // El paciente se asigna con alguna prioridad random
                                 {
                                     int prioridad = random.Next(4); // Aleatoriamente se saca la prioridad del paciente para ver en que cola ira
+
                                     Paciente nuevoPaciente = new(nombre, edad, tipo, prioridad);
+
                                     ninios[prioridad].PUSH(nuevoPaciente);
+
                                     MostrarDatosPaciente(nuevoPaciente);
+
                                 }
                             }
                             else
@@ -105,10 +121,11 @@ namespace Proyecto_de_Colas {
                                 {
                                     Console.Write("Ingrese el nombre del paciente: ");
                                     nombre = Console.ReadLine();
+
                                     if (string.IsNullOrEmpty(nombre))
                                     {
                                         Console.WriteLine("No ingreso ningun nombre.");
-                                    }    
+                                    }
 
                                 } while (string.IsNullOrEmpty(nombre));
 
@@ -116,7 +133,12 @@ namespace Proyecto_de_Colas {
                                 {
                                     Console.WriteLine("Ingrese <0> si el paciente no tiene nada grave.");
                                     Console.WriteLine("Ingrese <1> si el paciente se esta muriendo.");
+
                                     Console.Write("Opcion: ");
+
+                                    tipo = int.Parse(s: Console.ReadLine()!);
+
+
                                     tipo = int.Parse(s: Console.ReadLine());
                                  
                                     if ((tipo < 0) || (tipo > 1))
@@ -128,17 +150,22 @@ namespace Proyecto_de_Colas {
                                 if (tipo == 0) // Se asigna al paciente como paciente normal
                                 {
                                     Paciente nuevoPaciente = new(nombre, edad, tipo, 4);
+
                                     adultos[4].PUSH(nuevoPaciente);
+
                                     MostrarDatosPaciente(nuevoPaciente);
                                     
                                 }
                                 else
                                 {
                                     int prioridad = random.Next(4);       
+
                                     Paciente nuevoPaciente = new(nombre, edad, tipo, prioridad);
+
                                     adultos[prioridad].PUSH(nuevoPaciente);
+                                  
                                     MostrarDatosPaciente(nuevoPaciente);
-                                    
+        
                                 }
                             }
                             else
@@ -148,7 +175,7 @@ namespace Proyecto_de_Colas {
                         }
 
                         break;
-                        
+
                     #endregion
 
                     #region ATENDER
@@ -208,8 +235,9 @@ namespace Proyecto_de_Colas {
                     default:
                         Console.WriteLine("\nERROR. Opcion Invalida");
                         break;
-                    #endregion
+                        #endregion
                 }
+
                 if (op != 4)
                 {
                     Console.WriteLine("\nIngrese cualquier tecla para continuar...");
@@ -244,7 +272,9 @@ namespace Proyecto_de_Colas {
         #endregion
 
         #region MOSTRAR PACIENTE
+        
         public static void MostrarDatosPaciente(Paciente paciente)
+
         {
             Console.WriteLine("\n\nDATOS DEL PACIENTE");
             Console.WriteLine($"Nombre: {paciente.GetNombre()}");
@@ -266,7 +296,7 @@ namespace Proyecto_de_Colas {
 
         public static void BuscarPrioridad(int prioridad, int edad)
         {
-            switch(prioridad)
+            switch (prioridad)
             {
                 case 0:
                     Console.WriteLine("Prioridad: Maxima");
