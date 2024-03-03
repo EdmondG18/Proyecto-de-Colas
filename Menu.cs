@@ -45,7 +45,7 @@ namespace Proyecto_de_Colas
                     #region INGRESAR
                     case 1:
                         var random1 = new Random();
-                        int edad = 1; // random.Next(2); // Si el random es 0 es ninio, si sale 1 es adulto
+                        int edad = random1.Next(2); // Si el random es 0 es ninio, si sale 1 es adulto
                         int tipo;
                         string? nombre;
 
@@ -84,7 +84,7 @@ namespace Proyecto_de_Colas
 
                                 if (tipo == 0) // Se asigna al paciente como paciente normal
                                 {
-                                    Paciente nuevoPaciente = new(nombre, edad, tipo, 4);
+                                    Paciente nuevoPaciente = new(nombre, tipo, edad, 4);
 
                                     ninios[4].PUSH(nuevoPaciente);
 
@@ -94,7 +94,7 @@ namespace Proyecto_de_Colas
                                 {
                                     int prioridad = random1.Next(4); // Aleatoriamente se saca la prioridad del paciente para ver en que cola ira
 
-                                    Paciente nuevoPaciente = new(nombre, edad, tipo, prioridad);
+                                    Paciente nuevoPaciente = new(nombre, tipo, edad, prioridad);
 
                                     ninios[prioridad].PUSH(nuevoPaciente);
 
@@ -140,7 +140,7 @@ namespace Proyecto_de_Colas
 
                                 if (tipo == 0) // Se asigna al paciente como paciente normal
                                 {
-                                    Paciente nuevoPaciente = new(nombre, edad, tipo, 4);
+                                    Paciente nuevoPaciente = new(nombre, tipo, edad, 4);
 
                                     adultos[4].PUSH(nuevoPaciente);
 
@@ -151,7 +151,7 @@ namespace Proyecto_de_Colas
                                     var random2 = new Random();
                                     int prioridad = random2.Next(4);
 
-                                    Paciente nuevoPaciente = new(nombre, edad, tipo, prioridad);
+                                    Paciente nuevoPaciente = new(nombre, tipo, edad, prioridad);
 
                                     adultos[prioridad].PUSH(nuevoPaciente);
 
