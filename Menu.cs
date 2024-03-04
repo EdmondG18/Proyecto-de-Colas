@@ -125,7 +125,7 @@ namespace Proyecto_de_Colas
 
                                 do
                                 {
-                                    Console.WriteLine("Ingrese <0> si el paciente no tiene nada grave o ingrese <1> si el paciente se esta muriendo.");                             
+                                    Console.WriteLine("Ingrese <0> si el paciente no tiene nada grave o ingrese <1> si el paciente se esta muriendo.");
                                     Console.Write("Opcion: ");
                                     tipo = int.Parse(s: Console.ReadLine()!);
 
@@ -226,19 +226,14 @@ namespace Proyecto_de_Colas
 
                     #region MOSTRAR
                     case 3: // Mostrar Colas de Pacientes
-                        if (fullNinios > 0)
+
+                        if (fullNinios == 0 && fullAdultos == 0)
                         {
-                            MostrarPacientes(ninios);
-                            Console.WriteLine();
-                        }
-                        else if (fullAdultos > 0)
-                        {
-                            MostrarPacientes(adultos);
-                            Console.WriteLine();
+                            Console.WriteLine("No se encuentran pacientes para mostrar");
                         }
                         else
                         {
-                            Console.WriteLine("\nNo hay pacientes para mostrar");
+                            MostrarPacientes(ninios, adultos, fullNinios, fullAdultos);
                         }
 
                         break;
@@ -291,7 +286,7 @@ namespace Proyecto_de_Colas
         #region MOSTRAR DATOS PACIENTE
         public static void MostrarDatosPaciente(Paciente? paciente)
         {
-            Console.WriteLine("\n       DATOS DEL PACIENTE");
+            Console.WriteLine("\nDATOS DEL PACIENTE");
             Console.WriteLine($"Nombre: {paciente?.GetNombre()}");
 
             if (paciente?.GetEdad() == 0)
@@ -351,17 +346,45 @@ namespace Proyecto_de_Colas
         #endregion
 
         #region MOSTRAR PACIENTES
-        public static void MostrarPacientes(Cola[] pacientes)
+        public static void MostrarPacientes(Cola[] pacientesNinios, Cola[] pacientesAdultos, int fullNinios, int fullAdultos)
         {
-            foreach (Cola? cola in pacientes)
+            Console.WriteLine(fullAdultos);
+            if (fullNinios > 0)
             {
-                int length = cola.GetPacientesLength();
+                MostrarPacientesDePrioridad(pacientesNinios);
+            }
+
+
+            if (fullAdultos > 0)
+            {
+                MostrarPacientesDePrioridad(pacientesAdultos);
+            }
+
+
+            if (fullNinios > 0)
+            {
+                MostrarPacientesNormales(pacientesNinios);
+            }
+
+            if (fullAdultos > 0)
+            {
+                MostrarPacientesNormales(pacientesAdultos);
+            }
+        }
+        #endregion
+
+        #region MOSTRAR PACIENTES DE PRIORIDAD
+        private static void MostrarPacientesDePrioridad(Cola[] pacientes)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                int length = pacientes[i].GetPacientesLength();
 
                 if (length > -1)
                 {
-                    for (int i = 0; i <= length; i++)
+                    for (int j = 0; j <= length; j++)
                     {
-                        Paciente? paciente = cola.GetPaciente(i);
+                        Paciente? paciente = pacientes[i].GetPaciente(j);
                         MostrarDatosPaciente(paciente);
                     }
                 }
@@ -369,6 +392,22 @@ namespace Proyecto_de_Colas
         }
         #endregion
 
-        #endregion
+        #region MOSTRAR PACIENTES NORMALES
+        private static void MostrarPacientesNormales(Cola[] pacientes)
+        {
+            int length = pacientes[4].GetPacientesLength();
+
+            if (length > -1)
+            {
+                for (int j = 0; j <= length; j++)
+                {
+                    Paciente? paciente = pacientes[4].GetPaciente(j);
+                    MostrarDatosPaciente(paciente);
+                }
+            }
+        }
     }
+    #endregion
+
+    #endregion
 }
