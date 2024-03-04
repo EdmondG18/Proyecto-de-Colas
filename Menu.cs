@@ -19,8 +19,8 @@ namespace Proyecto_de_Colas
         #region Atributos 
         private int op;
         private readonly int tipos = 5; // Tipos de afecciones (Accidentes, Infartos, Afecciones Respiratorias, Partos/Pediatria, Normal)
-        private int fullNinios = 0; // El tope sera 25 ninios (5 por enfermedad)
-        private int fullAdultos = 0; // El tope sera 25 adultos (5 por enfermedad)
+        private int fullNinios = 0; // El tope sera 25 ninios
+        private int fullAdultos = 0; // El tope sera 25 adultos
         private readonly int maxPorMedico = 25;
         #endregion
 
@@ -31,7 +31,8 @@ namespace Proyecto_de_Colas
         {
             do
             {
-                Console.WriteLine("\nIngrese la opcion que desee realizar: ");
+                Console.WriteLine("Bienvenido al Centro Clinico de Emergencias\n");
+                Console.WriteLine("Ingrese la opcion que desee realizar: ");
                 Console.WriteLine("1. Ingresar paciente");
                 Console.WriteLine("2. Atender paciente");
                 Console.WriteLine("3. Mostrar todos los pacientes en cola");
@@ -57,7 +58,7 @@ namespace Proyecto_de_Colas
 
                                 do
                                 {
-                                    Console.Write("Ingrese el nombre del paciente: ");
+                                    Console.Write("\nIngrese el nombre del paciente: ");
                                     nombre = Console.ReadLine();
 
                                     if (string.IsNullOrEmpty(nombre))
@@ -69,9 +70,7 @@ namespace Proyecto_de_Colas
 
                                 do
                                 {
-                                    Console.WriteLine("Ingrese <0> si el paciente no tiene nada grave.");
-                                    Console.WriteLine("Ingrese <1> si el paciente se esta muriendo.");
-
+                                    Console.WriteLine("\nIngrese <0> si el paciente no tiene nada grave o ingrese <1> si el paciente se esta muriendo.");
                                     Console.Write("Opcion: ");
                                     tipo = int.Parse(s: Console.ReadLine()!);
 
@@ -114,7 +113,7 @@ namespace Proyecto_de_Colas
 
                                 do
                                 {
-                                    Console.Write("Ingrese el nombre del paciente: ");
+                                    Console.Write("\nIngrese el nombre del paciente: ");
                                     nombre = Console.ReadLine();
 
                                     if (string.IsNullOrEmpty(nombre))
@@ -126,9 +125,7 @@ namespace Proyecto_de_Colas
 
                                 do
                                 {
-                                    Console.WriteLine("Ingrese <0> si el paciente no tiene nada grave.");
-                                    Console.WriteLine("Ingrese <1> si el paciente se esta muriendo.");
-
+                                    Console.WriteLine("Ingrese <0> si el paciente no tiene nada grave o ingrese <1> si el paciente se esta muriendo.");                             
                                     Console.Write("Opcion: ");
                                     tipo = int.Parse(s: Console.ReadLine()!);
 
@@ -174,7 +171,7 @@ namespace Proyecto_de_Colas
                         edad = random.Next(2);
 
 
-                        if ((edad == 0) && (fullNinios > 0)) // Se removera a un nino si es que hay
+                        if ((edad == 0) && (fullNinios > 0)) // Se removera a un niño si es que hay
                         {
                             fullNinios--;
 
@@ -197,16 +194,31 @@ namespace Proyecto_de_Colas
                             {
                                 if (!(adultos[i].Vacia()))
                                 {
-                                    Console.WriteLine("Se esta atendiendo a este paciente: \n");
+                                    Console.WriteLine("\nSe esta atendiendo a este paciente: ");
                                     MostrarDatosPaciente(adultos[i].POPINICIAL());
                                     adultos[i].POP();
                                     break;
                                 }
                             }
                         }
+                        else if (fullNinios > 0)
+                        {
+                            fullNinios--;
+
+                            for (int i = 0; i < tipos; i++)
+                            {
+                                if (!(ninios[i].Vacia()))
+                                {
+                                    Console.WriteLine("\nSe esta atendiendo a este paciente: ");
+                                    MostrarDatosPaciente(ninios[i].POPINICIAL());
+                                    ninios[i].POP();
+                                    break;
+                                }
+                            }
+                        }
                         else
                         {
-                            Console.WriteLine("\nNo hay nadie en la cola\n");
+                            Console.WriteLine("\nNo hay nadie en la cola");
                         }
 
                         break;
@@ -226,7 +238,7 @@ namespace Proyecto_de_Colas
                         }
                         else
                         {
-                            Console.WriteLine("No hay pacientes para mostrar");
+                            Console.WriteLine("\nNo hay pacientes para mostrar");
                         }
 
                         break;
@@ -258,8 +270,6 @@ namespace Proyecto_de_Colas
         #region CREAR COLAS
         public void CrearColas()
         {
-            Console.WriteLine("Bienvenido al Centro Clinico de Emergencias\n");
-
             // Se crea la cola de ninios
             Cola[] ninios = new Cola[tipos];
             for (int i = 0; i < tipos; i++) // i=0 (Accidente) // i=1 (Infarto) // i=2 (Afeccion) // i=3 (Pediatria) // i=4 (Normal)
@@ -278,10 +288,10 @@ namespace Proyecto_de_Colas
         }
         #endregion
 
-        #region MOSTRAR PACIENTE
+        #region MOSTRAR DATOS PACIENTE
         public static void MostrarDatosPaciente(Paciente? paciente)
         {
-            Console.WriteLine("\n\nDATOS DEL PACIENTE");
+            Console.WriteLine("\n       DATOS DEL PACIENTE");
             Console.WriteLine($"Nombre: {paciente?.GetNombre()}");
 
             if (paciente?.GetEdad() == 0)
@@ -323,11 +333,11 @@ namespace Proyecto_de_Colas
                     Console.WriteLine("Prioridad: Alta");
                     if (edad == 0)
                     {
-                        Console.WriteLine("Paciente debe ir a Pediatria");
+                        Console.WriteLine("Paciente a Pediatria");
                     }
                     else
                     {
-                        Console.WriteLine("Paciente debe ir a Sala de Partos");
+                        Console.WriteLine("Paciente a Sala de Partos");
                     }
                     break;
 

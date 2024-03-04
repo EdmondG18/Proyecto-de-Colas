@@ -13,6 +13,7 @@ namespace Proyecto_de_Colas
         readonly Paciente?[] Elements;
         int tope;
         #endregion
+
         #region Constructor
         public Cola()
         {
