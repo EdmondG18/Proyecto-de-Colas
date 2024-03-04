@@ -31,14 +31,11 @@ Un médico para atender a los adultos.
 
 Funcionamiento del Sistema:
 
-1. Los pacientes se insertan en las colas según su prioridad. Para la prioridad debe existir un método que la genera de 
-1. forma aleatoria a la hora de pulsar insertar, debe usar class random de c#
+1. Los pacientes se insertan en las colas según su prioridad. Para la prioridad debe existir un método que la genera de forma aleatoria a la hora de pulsar insertar, debe usar class random de c#
 2. Los médicos atienden a los pacientes de acuerdo con su especialización y disponibilidad.
-3. Existe una opción en el menú para remover pacientes de las colas, considerando tanto las colas de prioridad como las colas 
-1. normales. Este remover es la simulación para atender un paciente
+3. Existe una opción en el menú para remover pacientes de las colas, considerando tanto las colas de prioridad como las colas normales. Este remover es la simulación para atender un paciente
 4. El sistema debe permitir reacomodar las colas para optimizar la atención médica.
-5. Se puede generar un reporte en cualquier momento para visualizar el estado de todas las colas y saber a quién se está 
-1. atendiendo en ese momento.
+5. Se puede generar un reporte en cualquier momento para visualizar el estado de todas las colas y saber a quién se está atendiendo en ese momento.
 
 Cantidad de Participantes: 2 personas
 Modalidad de Entrega: repositorio en github
