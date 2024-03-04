@@ -22,6 +22,7 @@ namespace Proyecto_de_Colas
         private int fullNinios = 0; // El tope sera 25 ninios
         private int fullAdultos = 0; // El tope sera 25 adultos
         private readonly int maxPorMedico = 25;
+        private Paciente? pacienteAtendido = null;
         #endregion
 
         #region Metodos
@@ -180,7 +181,8 @@ namespace Proyecto_de_Colas
                                 if (!(ninios[i].Vacia()))
                                 {
                                     Console.WriteLine("\nSe esta atendiendo a este paciente: ");
-                                    MostrarDatosPaciente(ninios[i].POPINICIAL());
+                                    this.pacienteAtendido = ninios[i].POPINICIAL();
+                                    MostrarDatosPaciente(this.pacienteAtendido);
                                     ninios[i].POP();
                                     break;
                                 }
@@ -195,7 +197,8 @@ namespace Proyecto_de_Colas
                                 if (!(adultos[i].Vacia()))
                                 {
                                     Console.WriteLine("\nSe esta atendiendo a este paciente: ");
-                                    MostrarDatosPaciente(adultos[i].POPINICIAL());
+                                    this.pacienteAtendido = adultos[i].POPINICIAL();
+                                    MostrarDatosPaciente(this.pacienteAtendido);
                                     adultos[i].POP();
                                     break;
                                 }
@@ -210,7 +213,8 @@ namespace Proyecto_de_Colas
                                 if (!(ninios[i].Vacia()))
                                 {
                                     Console.WriteLine("\nSe esta atendiendo a este paciente: ");
-                                    MostrarDatosPaciente(ninios[i].POPINICIAL());
+                                    this.pacienteAtendido = ninios[i].POPINICIAL();
+                                    MostrarDatosPaciente(this.pacienteAtendido);
                                     ninios[i].POP();
                                     break;
                                 }
@@ -233,7 +237,7 @@ namespace Proyecto_de_Colas
                         }
                         else
                         {
-                            MostrarPacientes(ninios, adultos, fullNinios, fullAdultos);
+                            MostrarPacientes(ninios, adultos);
                         }
 
                         break;
@@ -346,7 +350,7 @@ namespace Proyecto_de_Colas
         #endregion
 
         #region MOSTRAR PACIENTES
-        public static void MostrarPacientes(Cola[] pacientesNinios, Cola[] pacientesAdultos, int fullNinios, int fullAdultos)
+        public void MostrarPacientes(Cola[] pacientesNinios, Cola[] pacientesAdultos)
         {
             Console.WriteLine(fullAdultos);
             if (fullNinios > 0)
@@ -369,6 +373,12 @@ namespace Proyecto_de_Colas
             if (fullAdultos > 0)
             {
                 MostrarPacientesNormales(pacientesAdultos);
+            }
+
+            if (pacienteAtendido != null)
+            {
+                Console.WriteLine("\nPACIENTE ATENDIDO ACTUALMENTE:");
+                MostrarDatosPaciente(pacienteAtendido);
             }
         }
         #endregion
