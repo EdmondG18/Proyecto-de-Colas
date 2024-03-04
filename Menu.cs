@@ -204,7 +204,7 @@ namespace Proyecto_de_Colas
                         else if (fullNinios > 0)
                         {
                             fullNinios--;
-
+                         
                             for (int i = 0; i < tipos; i++)
                             {
                                 if (!(ninios[i].Vacia()))
@@ -229,7 +229,7 @@ namespace Proyecto_de_Colas
 
                         if (fullNinios == 0 && fullAdultos == 0)
                         {
-                            Console.WriteLine("No se encuentran pacientes para mostrar");
+                            Console.WriteLine("\nNo se encuentran pacientes para mostrar");
                         }
                         else
                         {
@@ -348,7 +348,6 @@ namespace Proyecto_de_Colas
         #region MOSTRAR PACIENTES
         public static void MostrarPacientes(Cola[] pacientesNinios, Cola[] pacientesAdultos, int fullNinios, int fullAdultos)
         {
-            Console.WriteLine(fullAdultos);
             if (fullNinios > 0)
             {
                 MostrarPacientesDePrioridad(pacientesNinios);
