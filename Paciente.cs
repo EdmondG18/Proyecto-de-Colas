@@ -18,7 +18,7 @@ namespace Proyecto_de_Colas
 
         #region Metodos
 
-        #region getNombre
+        #region GetNombre
         public string? GetNombre()
         {
             return nombre;

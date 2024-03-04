@@ -22,11 +22,12 @@ namespace Proyecto_de_Colas
         private int fullNinios = 0; // El tope sera 25 ninios
         private int fullAdultos = 0; // El tope sera 25 adultos
         private readonly int maxPorMedico = 25;
+        private Paciente? pacienteAtendido = null;
         #endregion
 
         #region Metodos
 
-        #region SubMenu
+        #region SUBMENU
         public void SubMenu(Cola[] ninios, Cola[] adultos)
         {
             do
@@ -86,7 +87,6 @@ namespace Proyecto_de_Colas
                                     Paciente nuevoPaciente = new(nombre, tipo, edad, 4);
 
                                     ninios[4].PUSH(nuevoPaciente);
-
                                     MostrarDatosPaciente(nuevoPaciente);
                                 }
                                 else // El paciente se asigna con alguna prioridad random
@@ -170,57 +170,85 @@ namespace Proyecto_de_Colas
                         var random = new Random();
                         edad = random.Next(2);
 
-
-                        if ((edad == 0) && (fullNinios > 0)) // Se removera a un niño si es que hay
+                        if (edad == 0) //Se remueve a un ninio
                         {
-                            fullNinios--;
-
-                            for (int i = 0; i < tipos; i++)
+                            if (fullNinios > 0) // Se comprueba si hay ninios para remover
                             {
-                                if (!(ninios[i].Vacia()))
+                                fullNinios--;
+
+                                for (int i = 0; i < tipos; i++)
                                 {
-                                    Console.WriteLine("\nSe esta atendiendo a este paciente: ");
-                                    MostrarDatosPaciente(ninios[i].POPINICIAL());
-                                    ninios[i].POP();
-                                    break;
+                                    if (!(ninios[i].Vacia()))
+                                    {
+                                        Console.WriteLine("\nSe esta atendiendo a este ninio: ");
+                                        MostrarDatosPaciente(ninios[i].POPINICIAL());                                        
+                                        pacienteAtendido = ninios[i].POPINICIAL();
+                                        ninios[i].POP();
+                                        break;
+                                    }
                                 }
                             }
-                        }
-                        else if (fullAdultos > 0) // Se removera a un adulto si es que hay
-                        {
-                            fullAdultos--;
-
-                            for (int i = 0; i < tipos; i++)
+                            else if (fullAdultos > 0) // Si no, se remueve adulto, si es que hay
                             {
-                                if (!(adultos[i].Vacia()))
+                                fullAdultos--;
+
+                                for (int i = 0; i < tipos; i++)
                                 {
-                                    Console.WriteLine("\nSe esta atendiendo a este paciente: ");
-                                    MostrarDatosPaciente(adultos[i].POPINICIAL());
-                                    adultos[i].POP();
-                                    break;
+                                    if (!(adultos[i].Vacia()))
+                                    {
+                                        Console.WriteLine("\nSe esta atendiendo a este adulto: ");
+                                        MostrarDatosPaciente(adultos[i].POPINICIAL());                                       
+                                        pacienteAtendido = adultos[i].POPINICIAL();
+                                        adultos[i].POP();
+                                        break;
+                                    }
                                 }
                             }
-                        }
-                        else if (fullNinios > 0)
-                        {
-                            fullNinios--;
-                         
-                            for (int i = 0; i < tipos; i++)
+                            else // Si no, no se remueve a nadie
                             {
-                                if (!(ninios[i].Vacia()))
-                                {
-                                    Console.WriteLine("\nSe esta atendiendo a este paciente: ");
-                                    MostrarDatosPaciente(ninios[i].POPINICIAL());
-                                    ninios[i].POP();
-                                    break;
-                                }
+                                Console.WriteLine("\nNo hay nadie en la cola");
                             }
                         }
-                        else
-                        {
-                            Console.WriteLine("\nNo hay nadie en la cola");
-                        }
 
+                        else // Se remueve un adulto
+                        {
+                            if (fullAdultos > 0) // Se comprueba si hay adultos para remover
+                            {
+                                fullAdultos--;
+
+                                for (int i = 0; i < tipos; i++)
+                                {
+                                    if (!(adultos[i].Vacia()))
+                                    {
+                                        Console.WriteLine("\nSe esta atendiendo a este paciente: ");
+                                        MostrarDatosPaciente(adultos[i].POPINICIAL());                                        
+                                        pacienteAtendido = adultos[i].POPINICIAL();
+                                        adultos[i].POP();
+                                        break;
+                                    }
+                                }
+                            }
+                            else if (fullNinios > 0) // Si no, se remueve un ninio si es que hay
+                            {
+                                fullNinios--;
+
+                                for (int i = 0; i < tipos; i++)
+                                {
+                                    if (!(ninios[i].Vacia()))
+                                    {
+                                        Console.WriteLine("\nSe esta atendiendo a este paciente: ");
+                                        MostrarDatosPaciente(ninios[i].POPINICIAL());                                       
+                                        pacienteAtendido = ninios[i].POPINICIAL();
+                                        ninios[i].POP();
+                                        break;
+                                    }
+                                }
+                            }
+                            else // Si no, no se remueve a nadie
+                            {
+                                Console.WriteLine("\nNo hay nadie en la cola");
+                            }
+                        }
                         break;
                     #endregion
 
@@ -229,10 +257,22 @@ namespace Proyecto_de_Colas
 
                         if (fullNinios == 0 && fullAdultos == 0)
                         {
-                            Console.WriteLine("\nNo se encuentran pacientes para mostrar");
+                            if (pacienteAtendido != null)
+                            {
+                                Console.WriteLine("\nEN CONSULTA: ");
+                                MostrarDatosPaciente(pacienteAtendido);
+                            }
+                            Console.WriteLine("\n\nEN COLA: ");
+                            Console.WriteLine("\nNo se encuentran pacientes para mostrar");                           
                         }
                         else
                         {
+                            if (pacienteAtendido != null)
+                            {
+                                Console.WriteLine("\nEN CONSULTA: ");
+                                MostrarDatosPaciente(pacienteAtendido);
+                            }
+                            Console.WriteLine("\n\nEN COLA: ");
                             MostrarPacientes(ninios, adultos, fullNinios, fullAdultos);
                         }
 
@@ -286,7 +326,7 @@ namespace Proyecto_de_Colas
         #region MOSTRAR DATOS PACIENTE
         public static void MostrarDatosPaciente(Paciente? paciente)
         {
-            Console.WriteLine("\nDATOS DEL PACIENTE");
+            Console.WriteLine("\n       DATOS DEL PACIENTE");
             Console.WriteLine($"Nombre: {paciente?.GetNombre()}");
 
             if (paciente?.GetEdad() == 0)
@@ -350,21 +390,25 @@ namespace Proyecto_de_Colas
         {
             if (fullNinios > 0)
             {
+                Console.WriteLine("\n\nCola de Ninios: ");
+            }
+            if (fullNinios > 0)
+            {
                 MostrarPacientesDePrioridad(pacientesNinios);
             }
-
-
-            if (fullAdultos > 0)
-            {
-                MostrarPacientesDePrioridad(pacientesAdultos);
-            }
-
-
             if (fullNinios > 0)
             {
                 MostrarPacientesNormales(pacientesNinios);
             }
 
+            if (fullAdultos > 0)
+            {
+                Console.WriteLine("\n\nCola de Adultos: ");
+            }
+            if (fullAdultos > 0)
+            {
+                MostrarPacientesDePrioridad(pacientesAdultos);
+            }
             if (fullAdultos > 0)
             {
                 MostrarPacientesNormales(pacientesAdultos);
@@ -375,7 +419,7 @@ namespace Proyecto_de_Colas
         #region MOSTRAR PACIENTES DE PRIORIDAD
         private static void MostrarPacientesDePrioridad(Cola[] pacientes)
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 4; i++)
             {
                 int length = pacientes[i].GetPacientesLength();
 
