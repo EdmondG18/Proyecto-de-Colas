@@ -419,35 +419,37 @@ namespace Proyecto_de_Colas
         #region MOSTRAR PACIENTES DE PRIORIDAD
         private static void MostrarPacientesDePrioridad(Cola[] pacientes)
         {
+
+            Cola auxiliar = new();
             for (int i = 0; i < 4; i++)
             {
                 int length = pacientes[i].GetPacientesLength();
-
-                if (length > -1)
+                
+                for (int j = -1; j < length; j++)
                 {
-                    for (int j = 0; j <= length; j++)
-                    {
-                        Paciente? paciente = pacientes[i].GetPaciente(j);
-                        MostrarDatosPaciente(paciente);
-                    }
+                    MostrarDatosPaciente(pacientes[i].POPINICIAL());
+                    auxiliar.PUSH(dato: pacientes[i].POPINICIAL()!);
+                    pacientes[i].POP();
+
                 }
-            }
+                pacientes[i] = auxiliar;
+                auxiliar = new();
+            }            
         }
         #endregion
 
         #region MOSTRAR PACIENTES NORMALES
         private static void MostrarPacientesNormales(Cola[] pacientes)
         {
+            Cola auxiliar = new();
             int length = pacientes[4].GetPacientesLength();
-
-            if (length > -1)
+            for (int j = -1; j < length; j++)
             {
-                for (int j = 0; j <= length; j++)
-                {
-                    Paciente? paciente = pacientes[4].GetPaciente(j);
-                    MostrarDatosPaciente(paciente);
-                }
+                MostrarDatosPaciente(pacientes[4].POPINICIAL());
+                auxiliar.PUSH(dato: pacientes[4].POPINICIAL()!);
+                pacientes[4].POP();
             }
+            pacientes[4] = auxiliar;
         }
     }
     #endregion
