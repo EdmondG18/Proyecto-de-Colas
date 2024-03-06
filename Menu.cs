@@ -194,6 +194,7 @@ namespace Proyecto_de_Colas
 
                                 for (int i = 0; i < tipos; i++)
                                 {
+
                                     if (!(adultos[i].Vacia()))
                                     {
                                         Console.WriteLine("\nSe esta atendiendo a este adulto: ");
@@ -386,7 +387,7 @@ namespace Proyecto_de_Colas
         #endregion
 
         #region MOSTRAR PACIENTES
-        public static void MostrarPacientes(Cola[] pacientesNinios, Cola[] pacientesAdultos, int fullNinios, int fullAdultos)
+        public void MostrarPacientes(Cola[] pacientesNinios, Cola[] pacientesAdultos)
         {
             if (fullNinios > 0)
             {
@@ -412,6 +413,12 @@ namespace Proyecto_de_Colas
             if (fullAdultos > 0)
             {
                 MostrarPacientesNormales(pacientesAdultos);
+            }
+
+            if (pacienteAtendido != null)
+            {
+                Console.WriteLine("\nPACIENTE ATENDIDO ACTUALMENTE:");
+                MostrarDatosPaciente(pacienteAtendido);
             }
         }
         #endregion
