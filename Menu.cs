@@ -414,12 +414,6 @@ namespace Proyecto_de_Colas
             {
                 MostrarPacientesNormales(pacientesAdultos);
             }
-
-            if (pacienteAtendido != null)
-            {
-                Console.WriteLine("\nPACIENTE ATENDIDO ACTUALMENTE:");
-                MostrarDatosPaciente(pacienteAtendido);
-            }
         }
         #endregion
 
@@ -431,7 +425,7 @@ namespace Proyecto_de_Colas
             for (int i = 0; i < 4; i++)
             {
                 int length = pacientes[i].GetPacientesLength();
-                
+
                 for (int j = -1; j < length; j++)
                 {
                     MostrarDatosPaciente(pacientes[i].POPINICIAL());
@@ -441,7 +435,7 @@ namespace Proyecto_de_Colas
                 }
                 pacientes[i] = auxiliar;
                 auxiliar = new();
-            }            
+            }
         }
         #endregion
 
