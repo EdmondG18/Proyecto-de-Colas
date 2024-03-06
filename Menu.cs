@@ -181,7 +181,7 @@ namespace Proyecto_de_Colas
                                     if (!(ninios[i].Vacia()))
                                     {
                                         Console.WriteLine("\nSe esta atendiendo a este ninio: ");
-                                        MostrarDatosPaciente(ninios[i].POPINICIAL());                                        
+                                        MostrarDatosPaciente(ninios[i].POPINICIAL());
                                         pacienteAtendido = ninios[i].POPINICIAL();
                                         ninios[i].POP();
                                         break;
@@ -198,7 +198,7 @@ namespace Proyecto_de_Colas
                                     if (!(adultos[i].Vacia()))
                                     {
                                         Console.WriteLine("\nSe esta atendiendo a este adulto: ");
-                                        MostrarDatosPaciente(adultos[i].POPINICIAL());                                       
+                                        MostrarDatosPaciente(adultos[i].POPINICIAL());
                                         pacienteAtendido = adultos[i].POPINICIAL();
                                         adultos[i].POP();
                                         break;
@@ -222,7 +222,7 @@ namespace Proyecto_de_Colas
                                     if (!(adultos[i].Vacia()))
                                     {
                                         Console.WriteLine("\nSe esta atendiendo a este paciente: ");
-                                        MostrarDatosPaciente(adultos[i].POPINICIAL());                                        
+                                        MostrarDatosPaciente(adultos[i].POPINICIAL());
                                         pacienteAtendido = adultos[i].POPINICIAL();
                                         adultos[i].POP();
                                         break;
@@ -238,7 +238,7 @@ namespace Proyecto_de_Colas
                                     if (!(ninios[i].Vacia()))
                                     {
                                         Console.WriteLine("\nSe esta atendiendo a este paciente: ");
-                                        MostrarDatosPaciente(ninios[i].POPINICIAL());                                       
+                                        MostrarDatosPaciente(ninios[i].POPINICIAL());
                                         pacienteAtendido = ninios[i].POPINICIAL();
                                         ninios[i].POP();
                                         break;
@@ -264,7 +264,7 @@ namespace Proyecto_de_Colas
                                 MostrarDatosPaciente(pacienteAtendido);
                             }
                             Console.WriteLine("\n\nEN COLA: ");
-                            Console.WriteLine("\nNo se encuentran pacientes para mostrar");                           
+                            Console.WriteLine("\nNo se encuentran pacientes para mostrar");
                         }
                         else
                         {
@@ -274,7 +274,7 @@ namespace Proyecto_de_Colas
                                 MostrarDatosPaciente(pacienteAtendido);
                             }
                             Console.WriteLine("\n\nEN COLA: ");
-                            MostrarPacientes(ninios, adultos, fullNinios, fullAdultos);
+                            MostrarPacientes(ninios, adultos);
                         }
 
                         break;
